@@ -123,7 +123,7 @@ const historyList = history.map((items, i) => {
     if(items[0] === "human") {
         return <>
             <h3 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">you</h3>
-            <div className={"appearance-none block w-full bg-green-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"}  key={i}>{items[1]}</div>
+            <div className={"appearance-none block w-full bg-blue-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"}  key={i}>{items[1]}</div>
         </>
     } else {
     return <>
@@ -163,6 +163,12 @@ const historyList = history.map((items, i) => {
           <h3 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Chatbot</h3>
           <div className={"appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"}>{answer}  </div>
       </section>
+
+        <section className="bg-green-400 p-4 mt-10 m-3 rounded disabled:hidden" hidden={!showHistory}>
+
+          <h2 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">History</h2>
+          <div>{historyList}</div>
+        </section>
         <button className="inline-flex items-center px-5 mb-2 py-2.5 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800 bg-black disabled:hidden " type="click" onClick={() => {
             if(showHistory) {
                 setShowHistory(false)
@@ -170,12 +176,6 @@ const historyList = history.map((items, i) => {
                 setShowHistory(true)
             }
         }}>show history</button>
-        <section className="bg-green-400 p-4 mt-10 m-3 rounded disabled:hidden" hidden={!showHistory}>
-
-          <h2 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">History</h2>
-          <div>{historyList}</div>
-        </section>
-
 
     </>
   )
