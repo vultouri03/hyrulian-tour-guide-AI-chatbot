@@ -30,3 +30,4 @@ After that is done you can run npm run dev to run your own version of the server
 
 Known Issues
 
+There is a folder called Anthropic test, this is used to test the anthropic API and can be used to implement the use of that API into the main program. This code is not that extensive and needs a lot of work to be implemented.
