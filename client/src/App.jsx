@@ -5,14 +5,25 @@ import './App.css'
 
 
 function App() {
+
+
     let SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition
     let SpeechRecognitionEvent = window.webkitSpeechRecognitionEvent || window.SpeechRecognitionEvent
 
     const [answer, setAnswer] = useState("")
     const [speech, setSpeech] = useState("")
+    let speechButton = false
     const [history, setHistory] = useState([])
     const [done, setDone] = useState("")
+    const [showHistory, setShowHistory] = useState(false)
     const [button, setButton] = useState(true);
+
+
+
+    if(window.webkitSpeechRecognition !== undefined) {
+        console.log(window.webkitSpeechRecognition)
+        speechButton = true
+      }
 
 
     useEffect(() => {
@@ -22,6 +33,7 @@ function App() {
     }, [done])
 
     function startListening() {
+
         let recognition = new SpeechRecognition()
         recognition.lang = 'en-US'
 
@@ -124,14 +136,14 @@ const historyList = history.map((items, i) => {
 
   return (
     <>
-      <section className="bg-blue-400 p-4 mt-10 m-3 rounded">
-        <form onSubmit={formSubmitHandler} disabled={!button} className="w-full max-w-lg text-left bg-grey-400 p-2 rounded">
+      <section hidden={showHistory} className="bg-green-400 p-4 mt-10 m-3 rounded">
+        <form onSubmit={formSubmitHandler} disabled={!button} className="w-full max-w-lg text-left bg-grey-400 rounded">
             <div hidden={button} className={"loader"}></div>
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full md:w-2/3 px-3">
               <label htmlFor="prompt" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">you</label>
-              <input type="text" id="prompt" name="prompt" placeholder="What is your question"  defaultValue={speech}
-                     className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"/>
+              <input type="text" id="prompt" name="prompt" placeholder="What is your question"  defaultValue={speech} disabled={!button}
+                     className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white disabled:bg-slate-500"/>
             </div>
             <div className="w-full md:w-1/3 px-3">
               <button type="submit" disabled={!button}
@@ -144,15 +156,27 @@ const historyList = history.map((items, i) => {
             </div>
           </div>
         </form>
-          <button className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800 bg-black disabled:bg-slate-500 disabled:hidden" type="click" onClick={startListening}>say your question</button>
+          <button className="inline-flex items-center px-5 mb-2 py-2.5 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800 bg-black disabled:hidden" disabled={!speechButton} type="click" onClick={startListening}>say your question</button>
+
 
 
           <h3 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Chatbot</h3>
           <div className={"appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"}>{answer}  </div>
-          <h2 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 bg-white">History</h2>
-          <div>{historyList}</div>
-
       </section>
+        <button className="inline-flex items-center px-5 mb-2 py-2.5 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800 bg-black disabled:hidden " type="click" onClick={() => {
+            if(showHistory) {
+                setShowHistory(false)
+            } else {
+                setShowHistory(true)
+            }
+        }}>show history</button>
+        <section className="bg-green-400 p-4 mt-10 m-3 rounded disabled:hidden" hidden={!showHistory}>
+
+          <h2 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">History</h2>
+          <div>{historyList}</div>
+        </section>
+
+
     </>
   )
 }
