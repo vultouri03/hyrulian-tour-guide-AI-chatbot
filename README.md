@@ -33,3 +33,7 @@ Known Issues
 There is a folder called Anthropic test, this is used to test the anthropic API and can be used to implement the use of that API into the main program. This code is not that extensive and needs a lot of work to be implemented.
 
 The compendium API is not used at the moment due to being too big. if you want to ask about ingredients in hyrule you can swap the region list with the compendium list and edit the prompt on line 56 in server.js to fit this change.
+
+The Speech recognition only works when you don't type in the input row
+
+When using the hosted backend, the first request might take a while, this is due to it being hosted on render
