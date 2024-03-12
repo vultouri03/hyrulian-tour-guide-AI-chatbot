@@ -27,9 +27,11 @@ function App() {
 
 
     useEffect(() => {
-        if(done ===  'hi')
-        setHistory(history => [...history, ["assistant", answer]])
-        setButton(true);
+        if(done ===  'hi') {
+            setHistory(history => [...history, ["assistant", answer]])
+            setButton(true);
+        }
+
     }, [done])
 
     function startListening() {
@@ -142,12 +144,12 @@ const historyList = history.map((items, i) => {
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full md:w-2/3 px-3">
               <label htmlFor="prompt" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">you</label>
-              <input type="text" id="prompt" name="prompt" placeholder="What is your question"  defaultValue={speech} disabled={!button}
+              <input type="text" id="prompt" name="prompt" placeholder="What is your question" defaultValue={speech} disabled={!button}
                      className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white disabled:bg-slate-500"/>
             </div>
             <div className="w-full md:w-1/3 px-3">
               <button type="submit" disabled={!button}
-                      className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800 bg-black disabled:bg-slate-500 disabled:hidden">
+                      className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800 bg-black disabled:bg-slate-500">
                 Ask your question
               </button>
 

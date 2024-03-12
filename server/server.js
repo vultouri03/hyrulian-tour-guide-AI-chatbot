@@ -12,12 +12,6 @@ const model = new ChatOpenAI({
     azureOpenAIApiDeploymentName: process.env.ENGINE_NAME,
 })
 
-const controller = new AbortController
-
-setTimeout(() => {
-    controller.abort("it took too long");
-}, 10000)
-
 const app = express();
 let mapCall = await fetch("https://botw-compendium.herokuapp.com/api/v3/regions/all").then(response => {
     // Check if the request was successful
